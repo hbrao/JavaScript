@@ -2,9 +2,9 @@
 requirejs.config({
     baseUrl: '.',
     paths: {
-        'ajax' : './public/modules/ajax',
-        'fetch' : './public/modules/fetch',
-        'async' : './public/modules/async'
+        'ajax' : './public/modules/es5',
+        'fetch' : './public/modules/es6',
+        'async' : './public/modules/es7'
     }
 })
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ajax vs Fetch vs Async</title>
+</head>
+<body>
+    <div class="container">
+        <h1>XMLHttpRequest (ES5 +)</h1>
+        <button id="btn1">Get</button>
+        <button id="btn2">Post</button>
+        <button id="btn3">Put</button>
+        <button id="btn4">Delete</button>
+        <br><br>
+        <div id="xhrout"></div>
+    </div>
+    <div class="container">
+            <h1>Fetch Demo (ES6 +)</h1>
+            <button id="btn5">Get Git Repos</button>
+            <br><br>
+            <div id="fetchout"></div>
+    </div>
+
+    <div class="container">
+            <h1>Promise Demo (ES6 +)</h1>
+            <button id="btn6">Get Users</button>
+            <button id="btn7">New User</button>
+            <button id="btn8">Delete User</button>
+            <br><br>
+            <div id="promiseout"></div>
+    </div>
+
+    <div class="container">
+            <h1>Async Await Demo (ES7 +)</h1>
+            <button id="btn9">Get Users</button>
+            <button id="btn10">New User</button>
+            <br><br>
+            <div id="asyncout"></div>
+    </div>    
+
+    <div class="container">
+        <h1>OAuth2.0 Demo</h1>
+        <button id="btn11">Get Token</button>
+        <div id="authtoken"></div>
+    </div>
+
+    <!-- Load requirejs -->
+    <script src="./public/r.js"></script>
+    <!-- Load requirejs config -->
+    <script src="./public/main.js"></script>
+</body>
+</html>

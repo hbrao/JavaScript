@@ -9,7 +9,7 @@ requirejs.config({
 })
 
 //Import require js modules defined above and write application logic
-require(['ajax', 'fetch', 'async'], (lib1, lib2, lib3) => {
+require(['ajax', 'fetch', 'async'], (es5, es6, es7) => {
 
     var newPost = {
         title : 'My new post',
@@ -19,7 +19,7 @@ require(['ajax', 'fetch', 'async'], (lib1, lib2, lib3) => {
     //XMLHttpRequest Demo
 
     function getPost() {
-        lib1.get('http://jsonplaceholder.typicode.com/posts/6',
+        es5.get('http://jsonplaceholder.typicode.com/posts/6',
             function(result, data) {
                 if ( result === 'SUCCESS') {
                     document.getElementById('xhrout').innerHTML = data
@@ -31,7 +31,7 @@ require(['ajax', 'fetch', 'async'], (lib1, lib2, lib3) => {
     }
 
     function addPost() {
-        lib1.post('http://jsonplaceholder.typicode.com/posts', newPost, 
+        es5.post('http://jsonplaceholder.typicode.com/posts', newPost, 
             function(result, data) {
                 if ( result === 201 )
                     document.getElementById('xhrout').innerHTML = data
@@ -42,7 +42,7 @@ require(['ajax', 'fetch', 'async'], (lib1, lib2, lib3) => {
     }
 
     function updPost() {
-        lib1.put('http://jsonplaceholder.typicode.com/posts/9', newPost, 
+        es5.put('http://jsonplaceholder.typicode.com/posts/9', newPost, 
             function(result, data) {
                 if ( result === 200 )
                     document.getElementById('xhrout').innerHTML = data
@@ -53,7 +53,7 @@ require(['ajax', 'fetch', 'async'], (lib1, lib2, lib3) => {
     }
 
     function delPost() {
-        lib1.delete('http://jsonplaceholder.typicode.com/posts/9', 
+        es5.delete('http://jsonplaceholder.typicode.com/posts/9', 
             function(result, data) {
                 if ( result === 200 )
                     document.getElementById('xhrout').innerHTML = data
@@ -91,7 +91,7 @@ require(['ajax', 'fetch', 'async'], (lib1, lib2, lib3) => {
     //Promise Demo
 
     function getUsers() {
-        lib2.get('https://jsonplaceholder.typicode.com/users')
+        es6.get('https://jsonplaceholder.typicode.com/users')
         .then(users => {
             let data = ''
             users.forEach(usr => {
@@ -108,14 +108,14 @@ require(['ajax', 'fetch', 'async'], (lib1, lib2, lib3) => {
     }
 
     function addUser(){
-        lib2.post('https://jsonplaceholder.typicode.com/users',newUser)
+        es6.post('https://jsonplaceholder.typicode.com/users',newUser)
         .then(usr => {
             document.getElementById('promiseout').innerHTML = `${usr.name} created with id ${usr.id}`
         })
     }
 
     function delUser(){
-        lib2.delete('https://jsonplaceholder.typicode.com/users/9')
+        es6.delete('https://jsonplaceholder.typicode.com/users/9')
         .then(data => {
             document.getElementById('promiseout').innerHTML = data
         })
@@ -130,14 +130,14 @@ require(['ajax', 'fetch', 'async'], (lib1, lib2, lib3) => {
     //Async | Await demo 
 
     function getUsers2(){
-    lib3.get('https://jsonplaceholder.typicode.com/users')
-    .then(users => {
+        es7.get('https://jsonplaceholder.typicode.com/users')
+        .then(users => {
             let out = ''
             users.forEach(usr => {
             out += `<li>${usr.name}</li>`
             })
             document.getElementById('asyncout').innerHTML = out
-    })
+        })
     }
 
     const newUser2 = {
@@ -147,7 +147,7 @@ require(['ajax', 'fetch', 'async'], (lib1, lib2, lib3) => {
     }
 
     function addUser2(){
-        lib3.post('https://jsonplaceholder.typicode.com/users', newUser2)
+        es7.post('https://jsonplaceholder.typicode.com/users', newUser2)
         .then(usr => {
             document.getElementById('asyncout').innerHTML = `user created with id ${usr.id}`
         })
@@ -157,29 +157,17 @@ require(['ajax', 'fetch', 'async'], (lib1, lib2, lib3) => {
     document.getElementById('btn10').addEventListener('click',addUser2)
 
 
-    // OAuth2.0 demo
+    // OAuth2.0 flows
 
-    function getToken() {
-        var auth = btoa('username:password');
-        console.log(auth);
-
-        fetch('https://idcs-6db8bcfa3ac7450e89e700f1290c9846.identity.preprod.oraclecloud.com/oauth2/v1/token', {
-            method : 'POST',
-            body: 'grant_type=password&username=sranard&password=Welcome1&scope=urn:opc:resource:fusion:oracle:sales-common/',
-            headers: {
-                'Authorization': 'Basic ' + auth,
-                'Content-Type' : 'application/x-www-form-urlencoded',
-                'charset' : 'UTF-8'
-            }
-        }).then(  (res) => {
-            return res.json()
-        }).then ( (data) => {
+    function getToken_UsingClientCredentials() {
+        es7.get('/v1/token/client_credentials')
+        .then( data => {
             document.getElementById('authtoken').innerHTML = `Bearer ${data.access_token}`;
-        }).catch( (err) => {
-            console.log(err)
+        })
+        .catch( error => {
             document.getElementById('authtoken').innerHTML = `${err}`;
         })
     }
 
-    document.getElementById('btn11').addEventListener('click', getToken)
+    document.getElementById('btn11').addEventListener('click', getToken_UsingClientCredentials)
 })

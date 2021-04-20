@@ -26,9 +26,9 @@ app.get('/v1/token/client_credentials', (req, res) => {
         body: 'grant_type=client_credentials&scope=custom_01'
     }).then( ( resp ) => {
         return resp.json()
-    }).then ( (data) => {
+    }).then ( ( data ) => {
         res.status(200).json(data)
-    }).catch( (err) => {
+    }).catch( ( err ) => {
         console.log(err)
         res.status(500).json(err)
     })
